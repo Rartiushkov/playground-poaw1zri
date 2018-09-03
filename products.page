@@ -1,0 +1,29 @@
+<apex:page Controller="ProductController"> 
+<apex:slds /> 
+<apex:pageBlock title="Product List"> 
+<apex:pageBlockSection columns="1"> 
+<apex:pageBlockTable value="{!products}" var="pitem"> 
+<apex:column headerValue="IMAGE"> 
+<apex:image value="{!pitem.Image__c}" width="100" height="100"/> 
+</apex:column> 
+<apex:column headerValue=" "> 
+<apex:outputLink value="/apex/productsdescriptionPages?id={!pitem.id}&refer=list" target="_self">{!pitem.Name} 
+</apex:outputLink> 
+</apex:column> 
+<apex:column headerValue="DESCRIPTION"> 
+<apex:outputText value="{!IF(LEN(pitem.Product_Description__c) > 100, LEFT(pitem.Product_Description__c,100)+' ',pitem.Product_Description__c)}" /> 
+<apex:outputLink value="/apex/productsdescriptionPages?id={!pitem.id}&refer=list" target="_self"> {!IF(LEN(pitem.Product_Description__c) > 100, 'more...', '')} 
+</apex:outputLink> 
+</apex:column> 
+<apex:column headerValue="COST"> 
+<apex:outputField value="{!pitem.Unit_Price__c}"/> 
+</apex:column> 
+<apex:column headerValue=" "> 
+<apex:outputLink value="/apex/Order?id={!pitem.id}&refer=list" target="_self"><button class="slds-button slds-button_brand">Buy</button> 
+
+</apex:outputLink> 
+</apex:column> 
+</apex:pageBlockTable> 
+</apex:pageBlockSection> 
+</apex:pageBlock> 
+</apex:page>
